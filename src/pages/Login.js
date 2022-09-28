@@ -24,7 +24,7 @@ class Login extends Component {
         </div>
         <div>
           <div>Password</div>
-          <input id="password" placeholder="Password" type="text"/>
+          <input id="password" placeholder="Password" type="password"/>
         </div>
         <button style={{margin: '10px'}} onClick={this.login}>Login</button>
         <button style={{margin: '10px'}} onClick={this.createAccount}>Create Account</button>
