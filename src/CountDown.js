@@ -13,9 +13,10 @@ export default class CountDown extends React.Component {
     componentDidMount() {
         this.timer = setInterval(() => {
             let { count } = this.state;
-            this.setState({
+            if (count > 0) {
+                this.setState({
                 count: count - 1
-            })
+            }) }
         }, 1000)
     }
 
@@ -29,10 +30,6 @@ export default class CountDown extends React.Component {
     }
 
     fmtMSS(s) { return (s - (s %= 60)) / 60 + (9 < s ? ':' : ':0') + s }
-
-    stopTimer() { // this will stop the timer. done when t = 0 or when timer runs out
-        
-    }
 
 
     render() {
