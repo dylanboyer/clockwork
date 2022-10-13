@@ -2,6 +2,7 @@
 
 
 import React from 'react';
+import Home from './pages/Home';
 
 export default class CountDown extends React.Component {
     constructor(props) {
@@ -31,6 +32,20 @@ export default class CountDown extends React.Component {
 
     fmtMSS(s) { return (s - (s %= 60)) / 60 + (9 < s ? ':' : ':0') + s }
 
+    updateTime() {
+        console.log("The function is being called")
+        const minutes = document.querySelector('#minutes').value
+        const seconds = document.querySelector('#seconds').value
+    
+        if (minutes <= 0 || seconds <= 0) {
+            alert("Please input a positive time.")
+        } else {
+            this.setState({
+                count: minutes * 60 + seconds
+            })
+        }
+    
+      }
 
     render() {
         let { count } = this.state;
@@ -41,3 +56,4 @@ export default class CountDown extends React.Component {
         )
     }
 }
+

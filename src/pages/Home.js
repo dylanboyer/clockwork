@@ -4,14 +4,17 @@ import CountDown from '../CountDown'
 
 class Home extends Component {
 
-  state = {
-    time: 1000
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      time: 1000
+    };
+} 
 
   signOut() {
     logout()
   }
-  
+
   render() {
     return (
       <div>
@@ -29,7 +32,14 @@ class Home extends Component {
           />
           <div>
             <br></br>
-            <div>Set Timer</div>
+            <div>How many minutes?</div>
+            <input id = "minutes" placeholder = "Enter time in minutes" type = "text"></input>
+            <div>How many seconds?</div>
+            <input id = "seconds" placeholder = "Enter time in seconds" type = "text"></input>
+            <div></div>
+            <button style={{margin: '10px'}} onClick={() => {
+                this.props.updateTime()
+            }}>Set Timer</button>
           </div>
         </div>
     </div>
