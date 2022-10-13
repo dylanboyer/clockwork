@@ -3,6 +3,11 @@ import { logout } from '../database/firebase'
 import CountDown from '../CountDown'
 
 class Home extends Component {
+
+  state = {
+    time: 1000
+  };
+
   signOut() {
     logout()
   }
@@ -20,10 +25,15 @@ class Home extends Component {
             onTimesup={() => {
               alert(`Time's up!`)
             }}
-            duration={65}
+            duration={this.state.time}
           />
+          <div>
+            <br></br>
+            <div>Set Timer</div>
+          </div>
         </div>
     </div>
+
 
     
     );
