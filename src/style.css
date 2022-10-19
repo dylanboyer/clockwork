@@ -1,0 +1,16 @@
+.centered {
+    align-items: center;
+}
+
+.button {
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.logoutButton {
+    align-items: center;
+    padding-top: 10px;
+}

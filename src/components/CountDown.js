@@ -1,18 +1,23 @@
 // https://github.com/haryphamdev/simple-react-countdown-timer/blob/master/src/CountDown.js
 
 import React from 'react'
-import Home from './pages/Home'
+import Home from '../pages/Home'
 
 export default class CountDown extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             count: props.duration ? props.duration : 5,
+            isStopped: false,
         }
     }
+
     componentDidMount() {
         this.timer = setInterval(() => {
             let { count } = this.state
+            if (this.state.isStopped) {
+                return
+            }
             if (count > 0) {
                 this.setState({
                     count: count - 1,
@@ -31,21 +36,37 @@ export default class CountDown extends React.Component {
     }
 
     fmtMSS(s) {
+        console.log(s)
         return (s - (s %= 60)) / 60 + (9 < s ? ':' : ':0') + s
     }
 
     updateTime() {
         console.log('The function is being called')
-        const minutes = document.querySelector('#minutes').value
-        const seconds = document.querySelector('#seconds').value
+        let minutes = document.querySelector('#minutes').value
+        let seconds = document.querySelector('#seconds').value
 
-        if (minutes <= 0 || seconds <= 0) {
-            alert('Please input a positive time.')
-        } else {
-            this.setState({
-                count: minutes * 6 + seconds,
-            })
+        if (!minutes && !seconds) {
+            alert('Please enter a time.')
+            return
         }
+
+        if (minutes < 0) {
+            alert('Please input a positive time.')
+        } else if (seconds < 0) {
+            alert('Please input a positive time.')
+        }
+
+        if (!minutes) {
+            minutes = 0
+        }
+
+        if (!seconds) {
+            seconds = 0
+        }
+
+        this.setState({
+            count: parseInt(minutes) * 60 + parseInt(seconds),
+        })
     }
 
     render() {
@@ -61,12 +82,30 @@ export default class CountDown extends React.Component {
                     <input id="seconds" placeholder="Enter time in seconds" type="text"></input>
                     <div></div>
                     <button
-                        style={{ margin: '10px' }}
+                        onClick={() => {
+                            this.setState({
+                                isStopped: false,
+                            })
+                        }}
+                    >
+                        Start
+                    </button>
+                    <button
+                        class="button"
                         onClick={() => {
                             this.updateTime()
                         }}
                     >
                         Set Timer
+                    </button>
+                    <button
+                        onClick={() => {
+                            this.setState({
+                                isStopped: true,
+                            })
+                        }}
+                    >
+                        Stop
                     </button>
                 </div>
             </div>
