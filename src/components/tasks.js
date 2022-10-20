@@ -6,7 +6,7 @@ class Tasks extends Component {
     render() {
         return (
             <div>
-                <div>How many minutes?</div>
+                <div>Tasks:</div>
                 <input id="task" placeholder="Enter task..." type="text"></input>
             </div>
         )

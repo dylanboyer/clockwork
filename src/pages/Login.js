@@ -1,36 +1,41 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { registerWithEmailAndPassword, loginWithEmailAndPassword } from '../database/firebase'
+import '../style.css'
 
 class Login extends Component {
+    createAccount() {
+        const email = document.querySelector('#email').value
+        const password = document.querySelector('#password').value
+        registerWithEmailAndPassword(email, password)
+    }
 
-  createAccount() {
-    const email = document.querySelector('#email').value;
-    const password = document.querySelector('#password').value;
-    registerWithEmailAndPassword(email, password)
-  }
+    login() {
+        const email = document.querySelector('#email').value
+        const password = document.querySelector('#password').value
+        loginWithEmailAndPassword(email, password)
+    }
 
-  login() {
-    const email = document.querySelector('#email').value;
-    const password = document.querySelector('#password').value;
-    loginWithEmailAndPassword(email, password)
-  }
-
-  render() {
-    return (
-      <div style={{ textAlign: 'center' }}>
-        <div>
-          <div>Email</div>
-          <input id="email" placeholder="Email" type="text"/>
-        </div>
-        <div>
-          <div>Password</div>
-          <input id="password" placeholder="Password" type="password"/>
-        </div>
-        <button style={{margin: '10px'}} onClick={this.login}>Login</button>
-        <button style={{margin: '10px'}} onClick={this.createAccount}>Create Account</button>
-      </div>
-    )
-  }
+    render() {
+        return (
+            <div class="loginContainer">
+                <h1>Clockwork</h1>
+                <div>
+                    <div style={{ marginTop: -10 }}>Email</div>
+                    <input id="email" placeholder="Email" type="text" />
+                </div>
+                <div>
+                    <div>Password</div>
+                    <input id="password" placeholder="Password" type="password" />
+                </div>
+                <button class="button" style={{ margin: '10px', marginTop: '20px' }} onClick={this.login}>
+                    Login
+                </button>
+                <button class="button" style={{ margin: '10px', marginBottom: '30px' }} onClick={this.createAccount}>
+                    Create Account
+                </button>
+            </div>
+        )
+    }
 }
 
-export default Login;
+export default Login

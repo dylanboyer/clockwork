@@ -8,7 +8,7 @@ export default class CountDown extends React.Component {
         super(props)
         this.state = {
             count: props.duration ? props.duration : 5,
-            isStopped: false,
+            isStopped: true,
         }
     }
 
@@ -73,7 +73,7 @@ export default class CountDown extends React.Component {
         let { count } = this.state
         return (
             <div>
-                {this.fmtMSS(count)}
+                <h2>{this.fmtMSS(count)}</h2>
                 <div>
                     <br></br>
                     <div>How many minutes?</div>
@@ -82,13 +82,14 @@ export default class CountDown extends React.Component {
                     <input id="seconds" placeholder="Enter time in seconds" type="text"></input>
                     <div></div>
                     <button
+                        class="button"
                         onClick={() => {
                             this.setState({
-                                isStopped: false,
+                                isStopped: !this.state.isStopped,
                             })
                         }}
                     >
-                        Start
+                        {this.state.isStopped ? 'Start' : 'Stop'}
                     </button>
                     <button
                         class="button"
@@ -97,15 +98,6 @@ export default class CountDown extends React.Component {
                         }}
                     >
                         Set Timer
-                    </button>
-                    <button
-                        onClick={() => {
-                            this.setState({
-                                isStopped: true,
-                            })
-                        }}
-                    >
-                        Stop
                     </button>
                 </div>
             </div>

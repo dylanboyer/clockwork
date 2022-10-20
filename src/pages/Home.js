@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { logout } from '../database/firebase'
 import CountDown from '../components/CountDown'
+import Taskbar from '../components/Taskbar'
 import '../style.css'
 
 class Home extends Component {
@@ -17,22 +18,27 @@ class Home extends Component {
 
     render() {
         return (
-            <div>
-                <div style={{ textAlign: 'center' }}>
-                    <h1>Welcome to Clockwork!</h1>
+            <body class="countdownContainer">
+                <div>
+                    <Taskbar></Taskbar>
+                    <div style={{ textAlign: 'center' }}>
+                        <h1>Welcome to Clockwork!</h1>
+                    </div>
+                    <div class="centered">
+                        <CountDown
+                            onTimesup={() => {
+                                alert(`Time's up!`)
+                            }}
+                            duration={this.state.time}
+                        />
+                    </div>
+                    <div>
+                        <button class="logoutButton" style={{ marginBottom: '30px' }} onClick={this.signOut}>
+                            Logout
+                        </button>
+                    </div>
                 </div>
-                <div class="centered">
-                    <CountDown
-                        onTimesup={() => {
-                            alert(`Time's up!`)
-                        }}
-                        duration={this.state.time}
-                    />
-                </div>
-                <div class="logoutButton">
-                    <button onClick={this.signOut}>Logout</button>
-                </div>
-            </div>
+            </body>
         )
     }
 }
