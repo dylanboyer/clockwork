@@ -95,6 +95,7 @@ export default class CountDown extends React.Component {
                         class="button"
                         onClick={() => {
                             this.updateTime()
+                            this.setState({ isStopped: true })
                         }}
                     >
                         Set Timer
