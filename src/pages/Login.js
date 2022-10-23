@@ -3,6 +3,11 @@ import { registerWithEmailAndPassword, loginWithEmailAndPassword } from '../data
 import '../style.css'
 
 class Login extends Component {
+    constructor() {
+        super()
+        this.onKeyUp = this.onKeyUp.bind(this)
+    }
+
     createAccount() {
         const email = document.querySelector('#email').value
         const password = document.querySelector('#password').value
@@ -15,6 +20,12 @@ class Login extends Component {
         loginWithEmailAndPassword(email, password)
     }
 
+    onKeyUp(event) {
+        if (event.charCode === 13) {
+            this.login()
+        }
+    }
+
     render() {
         return (
             <div class="loginContainer">
@@ -25,7 +36,7 @@ class Login extends Component {
                 </div>
                 <div>
                     <div>Password</div>
-                    <input id="password" placeholder="Password" type="password" />
+                    <input id="password" placeholder="Password" type="password" onKeyPress={this.onKeyUp} />
                 </div>
                 <button class="button" style={{ margin: '10px', marginTop: '20px' }} onClick={this.login}>
                     Login

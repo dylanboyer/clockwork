@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import '../style.css'
+import './Tasks'
+import Tasks from './Tasks'
 
 export default class Taskbar extends Component {
     state = {
@@ -14,6 +16,7 @@ export default class Taskbar extends Component {
         return (
             <div class="taskbar">
                 <h2>Tasks</h2>
+                <Tasks></Tasks>
             </div>
         )
     }

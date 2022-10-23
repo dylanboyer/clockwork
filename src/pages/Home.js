@@ -7,9 +7,6 @@ import '../style.css'
 class Home extends Component {
     constructor(props) {
         super(props)
-        this.state = {
-            time: 1200,
-        }
     }
 
     signOut() {
@@ -29,7 +26,7 @@ class Home extends Component {
                             onTimesup={() => {
                                 alert(`Time's up!`)
                             }}
-                            duration={this.state.time}
+                            duration={0}
                         />
                     </div>
                     <div>

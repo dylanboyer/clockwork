@@ -7,7 +7,7 @@ export default class CountDown extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            count: props.duration ? props.duration : 5,
+            count: props.duration,
             isStopped: true,
         }
     }
@@ -36,12 +36,10 @@ export default class CountDown extends React.Component {
     }
 
     fmtMSS(s) {
-        console.log(s)
         return (s - (s %= 60)) / 60 + (9 < s ? ':' : ':0') + s
     }
 
     updateTime() {
-        console.log('The function is being called')
         let minutes = document.querySelector('#minutes').value
         let seconds = document.querySelector('#seconds').value
 
