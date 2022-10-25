@@ -12,6 +12,12 @@ export default class Taskbar extends Component {
             { id: 4, text: '' },
         ],
     }
+
+    handleAddTask = (counterId, text) => {
+        const tasks = this.state.tasks.add(counterID)
+        this.setState({ text })
+    }
+
     render() {
         return (
             <div class="taskbar">

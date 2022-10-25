@@ -21,7 +21,7 @@ class Login extends Component {
     }
 
     onKeyUp(event) {
-        if (event.charCode === 13) {
+        if (event.charCode === 13) { // enter key is char code 13
             this.login()
         }
     }
