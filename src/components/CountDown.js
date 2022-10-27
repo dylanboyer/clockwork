@@ -48,10 +48,17 @@ export default class CountDown extends React.Component {
             return
         }
 
+        if (isNaN(minutes) || isNaN(seconds)) {
+            alert('Please enter a numerical value.')
+            return
+        }
+
         if (minutes < 0) {
             alert('Please input a positive time.')
+            return
         } else if (seconds < 0) {
             alert('Please input a positive time.')
+            return
         }
 
         if (!minutes) {
