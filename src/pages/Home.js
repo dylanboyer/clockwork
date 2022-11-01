@@ -3,6 +3,7 @@ import { logout } from '../database/firebase'
 import CountDown from '../components/CountDown'
 import Taskbar from '../components/Taskbar'
 import '../style.css'
+import { addTask, deleteTask, getTasks, updateTaskName, updateTaskPriority, updateTaskStatus } from '../database/tasks'
 
 class Home extends Component {
     constructor(props) {
@@ -11,6 +12,14 @@ class Home extends Component {
 
     signOut() {
         logout()
+        // Promised object == data that might not be there but will be. either the promised data or null
+
+        // .then catches whatever getTasks is returning
+        // .then is used for promised objects, typically with await functions
+        // deleteTask('4RmVZ4PqpNWePE7Zl948')
+        // getTasks().then((result) => {
+        //     console.log([...result])
+        // })
     }
 
     render() {

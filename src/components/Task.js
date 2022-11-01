@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
+import Taskbar from './Taskbar'
 
-export default class Tasks extends Component {
+export default class Task extends Component {
     onKeyUp(event) {
         if (event.charCode === 13) {
-            // enter key is char code 13
+            
         }
     }
 
@@ -11,10 +12,12 @@ export default class Tasks extends Component {
         return (
             <div>
                 <div>Tasks:</div>
-                <input id="task" placeholder="Enter task..." type="text">
-                    {' '}
+                <input
+                    id="task"
+                    placeholder="Enter task..."
+                    type="text"
                     onKeyPress={this.onKeyUp(document.querySelector('#task').value)}
-                </input>
+                ></input>
             </div>
         )
     }
