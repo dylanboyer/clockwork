@@ -72,6 +72,9 @@ export default class CountDown extends React.Component {
         this.setState({
             count: parseInt(minutes) * 60 + parseInt(seconds),
         })
+
+        document.querySelector('#minutes').value = ''
+        document.querySelector('#seconds').value = ''
     }
 
     render() {
@@ -82,9 +85,9 @@ export default class CountDown extends React.Component {
                 <div>
                     <br></br>
                     <div>How many minutes?</div>
-                    <input id="minutes" placeholder="Enter time in minutes" type="text"></input>
+                    <input id="minutes" placeholder="Enter number of minutes" type="text"></input>
                     <div>How many seconds?</div>
-                    <input id="seconds" placeholder="Enter time in seconds" type="text"></input>
+                    <input id="seconds" placeholder="Enter number of seconds" type="text"></input>
                     <div></div>
                     <button
                         class="button"

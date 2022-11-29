@@ -10,22 +10,28 @@ import {
     collection,
     query,
     orderBy,
+    Timestamp,
 } from 'firebase/firestore'
 import { parsePath } from 'react-router-dom'
+import uuid from 'react-uuid'
 
-export const addTask = async (taskName, completed, priority) => {
+export const addTask = async (taskName) => {
     try {
         // NOTE TO SELF: EACH PARAMETER IS A STEP DOWN THE FILE HIERARCHY CHAIN
-        await addDoc(collection(db, 'users', auth.currentUser.email, 'tasks'), {
+        const taskId = uuid()
+        await setDoc(doc(db, 'users', auth.currentUser.email, 'tasks', taskId), {
             taskName: taskName,
-            completed: completed,
-            priority: priority,
+            completed: false,
+            createdAt: Timestamp.fromDate(new Date()).toDate(),
+            taskId: taskId,
         })
     } catch (e) {
         console.log(e)
     }
 }
 
+// task id is the random string of characters given by firebase
+// document.getId is how you can retrieve the ID
 export const updateTaskName = async (taskName, taskId) => {
     try {
         await updateDoc(doc(db, 'users', auth.currentUser.email, 'tasks', taskId), {
@@ -46,22 +52,12 @@ export const updateTaskStatus = async (taskCompleted, taskId) => {
     }
 }
 
-export const updateTaskPriority = async (taskPriority, taskId) => {
-    try {
-        await updateDoc(doc(db, 'users', auth.currentUser.email, 'tasks', taskId), {
-            priority: taskPriority,
-        })
-    } catch (e) {
-        console.log(e)
-    }
-}
-
 export const getTasks = async () => {
     // Ref == Reference
     const tasksRef = collection(db, 'users', auth.currentUser.email, 'tasks')
 
     // q == query in firebase usually
-    const q = query(tasksRef, orderBy('priority'))
+    const q = query(tasksRef, orderBy('createdAt', 'desc'))
     // Snap == Snapshot of data
     const tasksSnap = await getDocs(q)
 

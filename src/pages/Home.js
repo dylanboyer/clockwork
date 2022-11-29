@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
-import { logout } from '../database/firebase'
+import React, { Component, useEffect } from 'react'
+import { auth, logout, addTask } from '../database/firebase'
 import CountDown from '../components/CountDown'
 import Taskbar from '../components/Taskbar'
 import '../style.css'
-import { addTask, deleteTask, getTasks, updateTaskName, updateTaskPriority, updateTaskStatus } from '../database/tasks'
+import { deleteTask, getTasks, updateTaskName, updateTaskPriority, updateTaskStatus } from '../database/firebase'
 
 class Home extends Component {
     constructor(props) {

@@ -1,36 +1,78 @@
 import React, { Component } from 'react'
+import * as Icon from 'react-bootstrap-icons'
 import '../style.css'
-import './Task'
-import Task from './Task'
+import { addTask, deleteTask, getTasks } from '../database/firebase'
+import { doc } from 'firebase/firestore'
+import { Octagon } from 'react-bootstrap-icons'
 
 export default class Taskbar extends Component {
-    state = {
-        tasks: [
-            // { id: 1, text: '' },
-            // { id: 2, text: '' },
-            // { id: 3, text: '' },
-            // { id: 4, text: '' },
-        ],
+    constructor() {
+        super()
+
+        this.onKeyUp = this.onKeyUp.bind(this)
+        this.state = {
+            mapOfTasks: null,
+        }
+    }
+    //x-octagon
+    componentDidMount() {
+        this.getAllTasks()
     }
 
-    // handleAddTask = (id) => {
-    //     const tasks = [...this.state.tasks];
-    //     const index = tasks.indexOf(id);
-    //     tasks[index] = {...id };
-    //     tasks[index].text = id
-    //     this.setState({ counters });
-    //  }
+    getAllTasks() {
+        getTasks().then((result) => {
+            this.setState({
+                mapOfTasks: result,
+            })
+        })
+    }
+
+    onKeyUp(event) {
+        if (event.charCode === 13) {
+            this.createTask()
+        }
+    }
+
+    createTask() {
+        const taskName = document.querySelector('#task').value
+        if (!taskName) {
+            alert('Please enter a task!')
+            return
+        }
+
+        addTask(taskName)
+        document.querySelector('#task').value = ''
+        this.getAllTasks()
+    }
+
+    deleteTaskById(taskID) {
+        deleteTask(taskID)
+        this.getAllTasks()
+    }
 
     render() {
         return (
             <div class="taskbar">
                 <h2>Tasks</h2>
-                {/* <Task
-                // key={counter.id}
-                // onDelete={this.handleDelete}
-                // onIncrement={this.handleIncrement}
-                // task={task}
-                ></Task> */}
+                <div>Tasks:</div>
+                <input id="task" placeholder="Enter task..." type="text" onKeyPress={this.onKeyUp}></input>
+
+                {this.state.mapOfTasks &&
+                    Array.from(this.state.mapOfTasks.values()).map((task) => {
+                        return (
+                            <ul class="taskList" key={task.taskId}>
+                                <text>{task.taskName}</text>
+                                <button
+                                    class="deleteTaskButton"
+                                    onClick={() => {
+                                        this.deleteTaskById(task.taskId)
+                                    }}
+                                >
+                                    <Icon.XOctagon />
+                                </button>
+                            </ul>
+                        )
+                    })}
             </div>
         )
     }

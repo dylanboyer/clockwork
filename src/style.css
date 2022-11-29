@@ -74,3 +74,16 @@
     margin-top: 10px;
     margin-left: 300px;
 }
+
+.taskList {
+    text-align: left;
+    margin-left: -10%;
+    padding-right: 40px;
+}
+
+.deleteTaskButton {
+    vertical-align: middle;
+    background-color: white;
+    border-color: white;
+    border-width: 0;
+}
